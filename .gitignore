@@ -1,0 +1,11 @@
+# Node modules
+frontend/node_modules/
+# Python
+backend/*.sqlite3
+backend/**/__pycache__/
+backend/.env
+frontend/.next/
+frontend/.env.local
+# Envs
+.env
+dist/

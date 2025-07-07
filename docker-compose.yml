@@ -1,0 +1,28 @@
+version: '3'
+services:
+  web:
+    build: ./backend
+    command: gunicorn localbox.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - /mnt/localbox:/mnt/localbox
+    env_file: .env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/healthz" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+  frontend:
+    build: ./frontend
+    command: npm run start
+    env_file: .env
+    volumes:
+      - /mnt/localbox:/mnt/localbox
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
