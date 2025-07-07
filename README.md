@@ -2,6 +2,10 @@
 
 Self-hosted Dropbox-style app for LAN file sharing.
 
+Features include a mobile‑first interface with drag‑and‑drop uploads. Multiple
+files can be uploaded at once and each upload shows a progress bar. When an
+upload finishes the browser will display a notification if permissions allow.
+
 ## Quick Start
 ```bash
 git clone <repo>
