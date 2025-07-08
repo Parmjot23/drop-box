@@ -16,9 +16,13 @@ docker compose up --build
 ```
 Open `http://<HOST_IP>:3000` in your browser.
 
+When accessing from other devices on your LAN, set `NEXT_PUBLIC_API_URL` in
+`.env` to `http://<HOST_IP>:8000` so media links resolve correctly.
+
 ## Configuration
 - Change mount point by editing `.env` (`DJANGO_MEDIA_ROOT`).
-- Change host IP via `NEXT_PUBLIC_API_URL` in `.env`.
+- Change host IP via `NEXT_PUBLIC_API_URL` in `.env` (use `http://web:8000` when running in Docker).
+- Ensure port `8000` is exposed in `docker-compose.yml` for media URLs.
 - Backup: `rsync -av $DJANGO_MEDIA_ROOT /path/to/backup/drive`.
 
 ## Drive Check

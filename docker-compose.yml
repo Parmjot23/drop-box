@@ -6,6 +6,8 @@ services:
     volumes:
       - ./media:/app/media
     env_file: .env
+    ports:
+      - "8000:8000"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/healthz" ]
       interval: 30s
