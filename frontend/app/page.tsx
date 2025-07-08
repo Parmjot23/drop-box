@@ -7,7 +7,8 @@ import FileCard from '../components/FileCard'
 import Upload from '../components/Upload'
 
 const fetchFiles = async () => {
-  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/files/`)
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? ''
+  const { data } = await axios.get(`${baseUrl}/api/files/`)
   return data.results
 }
 

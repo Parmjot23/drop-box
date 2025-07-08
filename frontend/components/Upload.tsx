@@ -24,8 +24,9 @@ export default function Upload() {
   const upload = (item: Item) => {
     const data = new FormData()
     data.append('file', item.file)
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? ''
     axios
-      .post(`${process.env.NEXT_PUBLIC_API_URL}/api/files/`, data, {
+      .post(`${baseUrl}/api/files/`, data, {
         headers: { 'Content-Type': 'multipart/form-data' },
         onUploadProgress: (e) => {
           const pct = e.total ? (e.loaded / e.total) * 100 : 0
