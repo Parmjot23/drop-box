@@ -1,6 +1,7 @@
 """URL configuration for LocalBox."""
-from django.http import HttpResponse
 from __future__ import annotations
+
+from django.http import HttpResponse
 
 from django.contrib import admin
 from django.urls import path, include

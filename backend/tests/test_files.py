@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from django.urls import reverse
 from rest_framework.test import APIClient
-import pytest
 from files.models import File
 from pathlib import Path
 
