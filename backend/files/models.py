@@ -4,13 +4,14 @@ import uuid
 from pathlib import Path
 from django.db import models
 from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 
 
 class ExternalStorage(FileSystemStorage):
     """Storage on mounted drive with UUID filenames."""
 
     def __init__(self, *args: str, **kwargs: str) -> None:
-        super().__init__(location='/mnt/localbox', *args, **kwargs)
+        super().__init__(location=str(settings.MEDIA_ROOT), *args, **kwargs)
 
     def get_available_name(self, name: str, max_length: int | None = None) -> str:
         original = Path(name).name
