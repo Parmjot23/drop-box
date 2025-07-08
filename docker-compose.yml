@@ -4,7 +4,7 @@ services:
     build: ./backend
     command: sh -c "python manage.py migrate && gunicorn localbox.wsgi:application --bind 0.0.0.0:8000"
     volumes:
-      - /mnt/localbox:/mnt/localbox
+      - ./media:/app/media
     env_file: .env
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/healthz" ]
@@ -17,7 +17,7 @@ services:
     command: npm run start
     env_file: .env
     volumes:
-      - /mnt/localbox:/mnt/localbox
+      - ./media:/app/media
     ports:
       - "3000:3000"
     healthcheck:
