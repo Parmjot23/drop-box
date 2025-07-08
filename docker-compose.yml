@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     build: ./backend
-    command: gunicorn localbox.wsgi:application --bind 0.0.0.0:8000
+    command: sh -c "python manage.py migrate && gunicorn localbox.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - /mnt/localbox:/mnt/localbox
     env_file: .env

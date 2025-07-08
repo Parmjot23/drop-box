@@ -8,6 +8,7 @@ interface Item {
   file: File
   progress: number
   done: boolean
+  url?: string
 }
 
 export default function Upload() {
@@ -33,9 +34,13 @@ export default function Upload() {
           )
         },
       })
-      .then(() => {
+      .then((resp) => {
         setItems((list) =>
-          list.map((it) => (it.id === item.id ? { ...it, progress: 100, done: true } : it))
+          list.map((it) =>
+            it.id === item.id
+              ? { ...it, progress: 100, done: true, url: resp.data.download_url }
+              : it
+          )
         )
         client.invalidateQueries({ queryKey: ['files'] })
         if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
@@ -65,6 +70,9 @@ export default function Upload() {
         {items.map((item) => (
           <div key={item.id}>
             <div className="text-sm">{item.file.name}</div>
+            {item.url && item.file.type.startsWith('image') && (
+              <img src={item.url} alt={item.file.name} className="mb-2 max-h-32" />
+            )}
             <div className="w-full h-2 bg-gray-200 rounded">
               <div
                 className="h-2 bg-blue-500 rounded"
