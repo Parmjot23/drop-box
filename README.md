@@ -11,6 +11,7 @@ upload finishes the browser will display a notification if permissions allow.
 git clone <repo>
 cd drop-box
 cp .env.example .env
+docker compose run web python manage.py migrate
 docker compose up --build
 ```
 Open `http://<HOST_IP>:3000` in your browser.
