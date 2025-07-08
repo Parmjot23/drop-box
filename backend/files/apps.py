@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from django.apps import AppConfig
 from django.core.exceptions import ImproperlyConfigured
+from django.conf import settings
 import os
 from pathlib import Path
 
@@ -10,6 +11,8 @@ class FilesConfig(AppConfig):
     name = 'files'
 
     def ready(self) -> None:  # type: ignore[override]
-        mount = Path('/mnt/localbox')
-        if not mount.exists() or not os.access(mount, os.W_OK):
-            raise ImproperlyConfigured('Mount point /mnt/localbox not writable')
+        mount = Path(settings.MEDIA_ROOT)
+        if not mount.exists():
+            mount.mkdir(parents=True, exist_ok=True)
+        if not os.access(mount, os.W_OK):
+            raise ImproperlyConfigured(f'Mount point {mount} not writable')
