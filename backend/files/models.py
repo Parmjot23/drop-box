@@ -13,7 +13,6 @@ class ExternalStorage(FileSystemStorage):
         super().__init__(location='/mnt/localbox', *args, **kwargs)
 
     def get_available_name(self, name: str, max_length: int | None = None) -> str:
-        ext = Path(name).suffix
         original = Path(name).name
         return f"{uuid.uuid4()}_{original}"
 
