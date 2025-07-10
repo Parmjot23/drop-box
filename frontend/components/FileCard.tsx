@@ -17,7 +17,11 @@ export default function FileCard({ file }: Props) {
   return (
     <div className="border rounded p-2 bg-white">
       {isImage ? (
-        <img src={file.download_url} alt={file.file} className="mb-2" />
+        <img
+          src={file.download_url}
+          alt={file.file}
+          className="mb-2 w-full h-auto object-cover"
+        />
       ) : (
         <div className="h-32 flex items-center justify-center bg-gray-100 mb-2">File</div>
       )}
