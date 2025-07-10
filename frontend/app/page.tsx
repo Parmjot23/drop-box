@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-4">
       <Upload />
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {data?.map((f: any) => (
           <FileCard key={f.id} file={f} />
         ))}
