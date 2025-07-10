@@ -1,6 +1,7 @@
 import './globals.css'
 import { Providers } from './providers'
 import React from 'react'
+import NavBar from '../components/NavBar'
 
 export const metadata = {
   title: 'LocalBox',
@@ -16,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="bg-gray-100">
         <Providers>
-          <div className="p-4 bg-white shadow">LocalBox</div>
+          <NavBar />
           <main className="p-4 max-w-screen-sm mx-auto">{children}</main>
         </Providers>
       </body>

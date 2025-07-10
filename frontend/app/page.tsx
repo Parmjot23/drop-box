@@ -1,10 +1,12 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import FileCard from '../components/FileCard'
 import Upload from '../components/Upload'
+import { useAuth } from './auth'
+import { useRouter } from 'next/navigation'
 
 const fetchFiles = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? ''
@@ -13,6 +15,13 @@ const fetchFiles = async () => {
 }
 
 export default function Home() {
+  const { token } = useAuth()
+  const router = useRouter()
+  useEffect(() => {
+    if (!token) {
+      router.push('/login')
+    }
+  }, [token, router])
   const { data } = useQuery({ queryKey: ['files'], queryFn: fetchFiles })
   return (
     <div className="flex flex-col gap-4">
