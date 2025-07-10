@@ -1,3 +1,4 @@
+'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import axios from 'axios'
@@ -25,9 +26,14 @@ export default function Upload() {
     const data = new FormData()
     data.append('file', item.file)
     const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? ''
+    const token =
+      typeof window !== 'undefined' ? localStorage.getItem('token') : null
     axios
       .post(`${baseUrl}/api/files/`, data, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          ...(token ? { Authorization: `Token ${token}` } : {}),
+        },
         onUploadProgress: (e) => {
           const pct = e.total ? (e.loaded / e.total) * 100 : 0
           setItems((list) =>
